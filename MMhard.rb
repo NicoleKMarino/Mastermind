@@ -27,8 +27,9 @@ def play_hard(secret)
       if user_choice=="Y"
         play_hard get_secret "hard"
       else
-        puts "That's too bad,goodbye"
-      end.play_hard
+        puts "That's too bad,"
+        abort("goodbye")
+      end
     elsif (misses.length != 0)
       puts "You have #{matches.length} in the right place"
       puts "You have #{misses.length} in the wrong place"

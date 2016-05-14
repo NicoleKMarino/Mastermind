@@ -25,8 +25,9 @@ def play_super(secret)
       if user_choice=="Y"
         play_super get_secret "super"
       else
-        puts "That's too bad,goodbye"
-      end.play_super
+        puts "That's too bad,"
+        abort("goodbye")
+      end
     elsif (misses.length != 0)
       puts "You have #{matches.length} in the right place"
       puts "You have #{misses.length} in the wrong place"
