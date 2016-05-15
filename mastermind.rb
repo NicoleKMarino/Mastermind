@@ -5,7 +5,7 @@ $counter=0
 def get_secret(difficulty)
   secret = case difficulty
   when "easy" then ["g","y","r","b"].shuffle
-  when "hard" then ["g","y","r","b","p","r","p"].shuffle
+  when "hard" then ["g","y","r","b","p","r"].shuffle
   when "super" then ["g","y","r","b","p","r","p","a"].shuffle
   end
   return secret
@@ -21,7 +21,7 @@ def master_mind
   when "I"
     puts "I have generated a beginner sequence with four elements made up of: (r)ed, (g)reen, (b)lue, and (y)ellow. You have to guess what that sequence is. I will tell you when you are right and when you are wrong"
     master_mind
-  when "Q" then puts "That's too bad, Goodbye"
+  when "Q" then   abort("That's too bad, goodbye")
   else
     puts "That's not an option."
     master_mind
@@ -39,6 +39,10 @@ def play_time(secret)
     play_time secret
   elsif (user_guess=="q" || user_guess=="Q")
     puts "That's too bad, goodbye"
+    master_mind
+  elsif user_guess.length < 4
+    puts "That's not long enough"
+    play_time secret
   else
     user_guess= user_guess.chars.to_a
     user_guess.each_with_index do |letter, index|
@@ -53,7 +57,7 @@ def play_time(secret)
     puts "Congratulations! You guessed the sequence #{secret}.Do you want to play again?Y/N"
     user_choice=gets.chomp.upcase
     if user_choice=="Y"
-      play_super get_secret "super"
+      master_mind
     else
       puts "That's too bad,"
       abort("goodbye")
@@ -68,3 +72,5 @@ def play_time(secret)
     puts "test"
   end
 end
+
+master_mind
